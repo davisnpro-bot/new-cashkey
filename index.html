@@ -12,27 +12,147 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'void': '#0F1115',
-                    'surface': '#1A1D23',
-                    'surface-light': '#23272F',
-                    'cream': '#E8E4DC',
-                    'cream-dim': '#9A958C',
-                    'gold': '#D4A853',
-                    'gold-light': '#E4C078',
-                    'gold-dim': '#8A7340',
-                    'sage': '#7A8B7E',
-                },
-                fontFamily: {
-                    'sans': ['Inter', 'system-ui', 'sans-serif'],
-                    'mono': ['JetBrains Mono', 'monospace'],
-                }
-            }
-        }
+// Mobile menu
+const mobileBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIcon = document.getElementById('menu-icon');
+
+mobileBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    mobileBtn.setAttribute('aria-expanded', isOpen);
+    if (isOpen) {
+        menuIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+    } else {
+        menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
     }
+});
+
+document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+        menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+    });
+});
+
+// Owner form multi-step
+var currentStep = 1;
+var totalSteps = 3;
+
+function updateProgress() {
+    document.getElementById('step-num').textContent = currentStep;
+    document.getElementById('form-progress').style.width = (currentStep / totalSteps * 100) + '%';
+}
+
+function nextStep() {
+    if (currentStep < totalSteps) {
+        document.getElementById('form-step-' + currentStep).style.display = 'none';
+        currentStep++;
+        document.getElementById('form-step-' + currentStep).style.display = 'block';
+        updateProgress();
+    }
+}
+
+function prevStep() {
+    if (currentStep > 1) {
+        document.getElementById('form-step-' + currentStep).style.display = 'none';
+        currentStep--;
+        document.getElementById('form-step-' + currentStep).style.display = 'block';
+        updateProgress();
+    }
+}
+
+// Tenant form multi-step
+var tenantCurrentStep = 1;
+var tenantTotalSteps = 3;
+
+function updateTenantProgress() {
+    document.getElementById('tenant-step-num').textContent = tenantCurrentStep;
+    document.getElementById('tenant-form-progress').style.width = (tenantCurrentStep / tenantTotalSteps * 100) + '%';
+}
+
+function nextTenantStep() {
+    if (tenantCurrentStep < tenantTotalSteps) {
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
+        tenantCurrentStep++;
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
+        updateTenantProgress();
+    }
+}
+
+function prevTenantStep() {
+    if (tenantCurrentStep > 1) {
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
+        tenantCurrentStep--;
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
+        updateTenantProgress();
+    }
+}
+
+// Form submission handler
+function handleFormSubmit(e, formType) {
+    e.preventDefault();
+    var btn = e.target.querySelector('button[type="submit"]');
+    var originalText = btn.innerHTML;
+    btn.innerHTML = 'Sending...';
+    btn.disabled = true;
+
+    setTimeout(function() {
+        var modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4';
+        modal.innerHTML = '<div class="bg-surface border border-cream/10 rounded-xl p-8 max-w-md w-full text-center"><div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3 class="text-xl font-semibold text-cream mb-2">Thank You</h3><p class="text-sm text-cream-dim mb-6">We have received your inquiry and will contact you within one business day.</p><button onclick="this.closest('.fixed').remove()" class="btn-primary w-full">Got It</button></div>';
+        document.body.appendChild(modal);
+
+        e.target.reset();
+        currentStep = 1;
+        tenantCurrentStep = 1;
+        document.getElementById('form-step-2').style.display = 'none';
+        document.getElementById('form-step-3').style.display = 'none';
+        document.getElementById('form-step-1').style.display = 'block';
+        document.getElementById('tenant-step-2').style.display = 'none';
+        document.getElementById('tenant-step-3').style.display = 'none';
+        document.getElementById('tenant-step-1').style.display = 'block';
+        updateProgress();
+        updateTenantProgress();
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }, 1500);
+}
+
+// Scroll reveal
+var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// Nav offset
+function updateNavOffset() {
+    var nav = document.getElementById('site-nav');
+    if (nav) {
+        document.documentElement.style.setProperty('--nav-offset', nav.offsetHeight + 'px');
+    }
+}
+updateNavOffset();
+window.addEventListener('resize', updateNavOffset);
 </script>
 <style>
     :root { --nav-offset: 80px; }
