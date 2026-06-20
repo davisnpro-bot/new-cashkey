@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
 <script>
     tailwind.config = {
         theme: {
@@ -82,6 +83,7 @@
     ::selection { background: rgba(212, 168, 83, 0.3); color: #E8E4DC; }
     :focus-visible { outline: 2px solid #D4A853; outline-offset: 2px; }
 </style>
+<base target="_blank">
 </head>
 <body>
 <!-- Navigation -->
@@ -90,7 +92,7 @@
         <div class="flex justify-between items-center h-[80px]">
             <a href="#" class="flex flex-col group" aria-label="CashKey Property Group">
                 <span class="font-extrabold text-white tracking-tight text-xl leading-none">CashKey</span>
-                <span class="text-gold text-[0.55rem] tracking-[0.25em] font-semibold leading-none mt-0.5">PROPERTY GROUP</span>
+                <span class="text-gold text-[0.55rem] tracking-[0.25em] font-semibold leading-none mt-0.5" style="color:#D4A853">PROPERTY GROUP</span>
             </a>
             <div class="hidden md:flex items-center gap-8">
                 <a href="#services" class="text-sm text-white hover:text-gold transition-colors">Services</a>
@@ -105,7 +107,7 @@
             </button>
         </div>
         <div id="mobile-menu" class="mobile-menu md:hidden pb-5">
-            <div class="flex flex-col gap-1 pt-2 border-t border-cream/5">
+            <div class="flex flex-col gap-1 pt-2 ">
                 <a href="#services" class="text-white hover:text-gold transition-colors py-3 text-sm">Services</a>
                 <a href="#about" class="text-white hover:text-gold transition-colors py-3 text-sm">About</a>
                 <a href="#areas" class="text-white hover:text-gold transition-colors py-3 text-sm">Service Areas</a>
@@ -122,7 +124,7 @@
             <p class="label mb-4">Northern New Jersey & Hudson Valley</p>
             <h1 class="heading-xl text-cream mb-6">
                 Property Management &<br/>
-                <span class="text-gold">Real Estate Solutions</span>
+                <span class="text-gold" style="color:#D4A853">Real Estate Solutions</span>
             </h1>
             <p class="body-lg mb-10">
                 Full-service property management, leasing, and investment acquisition for property owners across Northern New Jersey and New York's Hudson Valley. We handle the details so you do not have to.
@@ -424,7 +426,7 @@
                                 <option>$3,500+</option>
                             </select>
                         </div>
-                        <textarea class="form-input" rows="3" placeholder="Any specific needs or questions..."></textarea>
+                        <textarea class="form-input" rows="6" placeholder="Any specific needs or questions..."></textarea>
                     </div>
                     <button type="submit" class="btn-primary w-full mt-4">Submit Inquiry</button>
                 </form>
@@ -434,13 +436,13 @@
 </section>
 
 <!-- Footer -->
-<footer class="py-16 border-t border-cream/5">
+<footer class="py-16 ">
     <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="grid md:grid-cols-3 gap-10 mb-12">
             <div>
                 <div class="flex flex-col mb-4">
                     <span class="font-extrabold text-white tracking-tight text-xl leading-none">CashKey</span>
-                    <span class="text-gold text-[0.55rem] tracking-[0.25em] font-semibold leading-none mt-0.5">PROPERTY GROUP</span>
+                    <span class="text-gold text-[0.55rem] tracking-[0.25em] font-semibold leading-none mt-0.5" style="color:#D4A853">PROPERTY GROUP</span>
                 </div>
                 <p class="text-sm text-cream-dim leading-relaxed mb-4">Professional property management and real estate investment services in Northern New Jersey, the Hudson Valley, and the greater Tri-State area.</p>
             </div>
@@ -460,12 +462,13 @@
                 </ul>
             </div>
         </div>
-        <div class="border-t border-cream/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class=" pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-xs text-cream-dim/40">&copy; 2026 CashKey Property Group, LLC. All rights reserved.</p>
             <p class="text-xs text-cream-dim/40">Licensed Real Estate Investment Company</p>
         </div>
     </div>
 </footer>
+
 
 <script>
 // Mobile menu
@@ -491,78 +494,49 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     });
 });
 
-// Owner form multi-step
-let currentStep = 1;
-const totalSteps = 3;
-
-function updateProgress() {
-    document.getElementById('step-num').textContent = currentStep;
-    document.getElementById('form-progress').style.width = (currentStep / totalSteps * 100) + '%';
-}
-
-function nextStep() {
-    if (currentStep < totalSteps) {
-        document.getElementById('form-step-' + currentStep).classList.add('hidden');
-        currentStep++;
-        document.getElementById('form-step-' + currentStep).classList.remove('hidden');
-        updateProgress();
-    }
-}
-
-function prevStep() {
-    if (currentStep > 1) {
-        document.getElementById('form-step-' + currentStep).classList.add('hidden');
-        currentStep--;
-        document.getElementById('form-step-' + currentStep).classList.remove('hidden');
-        updateProgress();
-    }
-}
-
-// Tenant form multi-step
-let tenantCurrentStep = 1;
-const tenantTotalSteps = 3;
-
-function updateTenantProgress() {
-    document.getElementById('tenant-step-num').textContent = tenantCurrentStep;
-    document.getElementById('tenant-form-progress').style.width = (tenantCurrentStep / tenantTotalSteps * 100) + '%';
-}
-
-function nextTenantStep() {
-    if (tenantCurrentStep < tenantTotalSteps) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.add('hidden');
-        tenantCurrentStep++;
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.remove('hidden');
-        updateTenantProgress();
-    }
-}
-
-function prevTenantStep() {
-    if (tenantCurrentStep > 1) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.add('hidden');
-        tenantCurrentStep--;
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.remove('hidden');
-        updateTenantProgress();
-    }
-}
-
-// Form submission handler
+// Form submission handler - shows success modal
 function handleFormSubmit(e, formType) {
     e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
+
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+
+    if (!btn) {
+        console.error('Submit button not found');
+        return;
+    }
+
     const originalText = btn.innerHTML;
     btn.innerHTML = 'Sending...';
     btn.disabled = true;
 
+    // Simulate form submission delay
     setTimeout(() => {
+        // Create and show success modal with inline styles
         const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4';
-        modal.innerHTML = '<div class="bg-surface border border-cream/10 rounded-xl p-8 max-w-md w-full text-center"><div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h3 class="text-xl font-semibold text-cream mb-2">Thank You</h3><p class="text-sm text-cream-dim mb-6">We have received your inquiry and will contact you within one business day.</p><button onclick="this.closest('.fixed').remove()" class="btn-primary w-full">Got It</button></div>';
+        modal.id = 'success-modal';
+        modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:1rem;';
+
+        modal.innerHTML = `
+            <div style="background:#1A1D23;border:1px solid rgba(232,228,220,0.1);border-radius:1rem;padding:2rem;max-width:28rem;width:100%;text-align:center;box-shadow:0 25px 50px rgba(0,0,0,0.5);">
+                <div style="width:3rem;height:3rem;border-radius:50%;background:rgba(212,168,83,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem auto;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <h3 style="font-size:1.25rem;font-weight:600;color:#E8E4DC;margin-bottom:0.5rem;font-family:Inter,system-ui,sans-serif;">Thank You</h3>
+                <p style="font-size:0.875rem;color:#9A958C;margin-bottom:1.5rem;line-height:1.6;font-family:Inter,system-ui,sans-serif;">We have received your inquiry and will contact you within one business day.</p>
+                <button onclick="document.getElementById('success-modal').remove()" style="display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;padding:1rem 2rem;border-radius:0.5rem;font-weight:700;font-size:1rem;background:#D4A853;color:#0F1115;border:none;cursor:pointer;width:100%;transition:all 0.2s ease;font-family:Inter,system-ui,sans-serif;" onmouseover="this.style.background='#E4C078'" onmouseout="this.style.background='#D4A853'">Got It</button>
+            </div>
+        `;
+
         document.body.appendChild(modal);
 
-        e.target.reset();
+        // Reset form
+        form.reset();
         btn.innerHTML = originalText;
         btn.disabled = false;
-    }, 1500);
+    }, 1200);
 }
 
 // Scroll reveal
@@ -597,6 +571,5 @@ function updateNavOffset() {
 }
 updateNavOffset();
 window.addEventListener('resize', updateNavOffset);
-</script>
-</body>
+</script></body>
 </html>
