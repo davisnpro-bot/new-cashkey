@@ -636,60 +636,6 @@ function prevTenantStep() {
     }
 }
 
-// Owner form multi-step
-let currentStep = 1;
-const totalSteps = 3;
-
-function updateProgress() {
-    document.getElementById('step-num').textContent = currentStep;
-    document.getElementById('form-progress').style.width = (currentStep / totalSteps * 100) + '%';
-}
-
-function nextStep() {
-    if (currentStep < totalSteps) {
-        document.getElementById('form-step-' + currentStep).style.display = 'none';
-        currentStep++;
-        document.getElementById('form-step-' + currentStep).style.display = 'block';
-        updateProgress();
-    }
-}
-
-function prevStep() {
-    if (currentStep > 1) {
-        document.getElementById('form-step-' + currentStep).style.display = 'none';
-        currentStep--;
-        document.getElementById('form-step-' + currentStep).style.display = 'block';
-        updateProgress();
-    }
-}
-
-// Tenant form multi-step
-let tenantCurrentStep = 1;
-const tenantTotalSteps = 3;
-
-function updateTenantProgress() {
-    document.getElementById('tenant-step-num').textContent = tenantCurrentStep;
-    document.getElementById('tenant-form-progress').style.width = (tenantCurrentStep / tenantTotalSteps * 100) + '%';
-}
-
-function nextTenantStep() {
-    if (tenantCurrentStep < tenantTotalSteps) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
-        tenantCurrentStep++;
-        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
-        updateTenantProgress();
-    }
-}
-
-function prevTenantStep() {
-    if (tenantCurrentStep > 1) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
-        tenantCurrentStep--;
-        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
-        updateTenantProgress();
-    }
-}
-
 // Form submission handler
 function handleFormSubmit(e, formType) {
     e.preventDefault();
