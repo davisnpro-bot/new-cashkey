@@ -372,7 +372,7 @@
                         </div>
                         <button type="button" class="btn-primary w-full mt-5" onclick="nextStep()">Continue</button>
                     </div>
-                    <div id="form-step-2" class="hidden">
+                    <div id="form-step-2" style="display:none">
                         <p class="text-sm text-cream-dim mb-4">A few details about the property.</p>
                         <div class="space-y-3">
                             <div class="grid grid-cols-2 gap-3">
@@ -399,7 +399,7 @@
                             <button type="button" class="btn-primary flex-1" onclick="nextStep()">Continue</button>
                         </div>
                     </div>
-                    <div id="form-step-3" class="hidden">
+                    <div id="form-step-3" style="display:none">
                         <p class="text-sm text-cream-dim mb-4">How should we reach you?</p>
                         <div class="space-y-3">
                             <div class="grid grid-cols-2 gap-3">
@@ -472,7 +472,7 @@
                         </div>
                         <button type="button" class="btn-primary w-full mt-5" onclick="nextTenantStep()">Continue</button>
                     </div>
-                    <div id="tenant-step-2" class="hidden">
+                    <div id="tenant-step-2" style="display:none">
                         <p class="text-sm text-cream-dim mb-4">A few more details.</p>
                         <div class="space-y-3">
                             <select class="form-select" required>
@@ -501,7 +501,7 @@
                             <button type="button" class="btn-primary flex-1" onclick="nextTenantStep()">Continue</button>
                         </div>
                     </div>
-                    <div id="tenant-step-3" class="hidden">
+                    <div id="tenant-step-3" style="display:none">
                         <p class="text-sm text-cream-dim mb-4">How should we reach you?</p>
                         <div class="space-y-3">
                             <div class="grid grid-cols-2 gap-3">
@@ -593,18 +593,18 @@ function updateProgress() {
 
 function nextStep() {
     if (currentStep < totalSteps) {
-        document.getElementById('form-step-' + currentStep).classList.add('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'none';
         currentStep++;
-        document.getElementById('form-step-' + currentStep).classList.remove('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'block';
         updateProgress();
     }
 }
 
 function prevStep() {
     if (currentStep > 1) {
-        document.getElementById('form-step-' + currentStep).classList.add('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'none';
         currentStep--;
-        document.getElementById('form-step-' + currentStep).classList.remove('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'block';
         updateProgress();
     }
 }
@@ -620,18 +620,18 @@ function updateTenantProgress() {
 
 function nextTenantStep() {
     if (tenantCurrentStep < tenantTotalSteps) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.add('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
         tenantCurrentStep++;
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.remove('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
         updateTenantProgress();
     }
 }
 
 function prevTenantStep() {
     if (tenantCurrentStep > 1) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.add('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
         tenantCurrentStep--;
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.remove('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
         updateTenantProgress();
     }
 }
@@ -647,18 +647,18 @@ function updateProgress() {
 
 function nextStep() {
     if (currentStep < totalSteps) {
-        document.getElementById('form-step-' + currentStep).classList.add('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'none';
         currentStep++;
-        document.getElementById('form-step-' + currentStep).classList.remove('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'block';
         updateProgress();
     }
 }
 
 function prevStep() {
     if (currentStep > 1) {
-        document.getElementById('form-step-' + currentStep).classList.add('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'none';
         currentStep--;
-        document.getElementById('form-step-' + currentStep).classList.remove('hidden');
+        document.getElementById('form-step-' + currentStep).style.display = 'block';
         updateProgress();
     }
 }
@@ -674,18 +674,18 @@ function updateTenantProgress() {
 
 function nextTenantStep() {
     if (tenantCurrentStep < tenantTotalSteps) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.add('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
         tenantCurrentStep++;
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.remove('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
         updateTenantProgress();
     }
 }
 
 function prevTenantStep() {
     if (tenantCurrentStep > 1) {
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.add('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'none';
         tenantCurrentStep--;
-        document.getElementById('tenant-step-' + tenantCurrentStep).classList.remove('hidden');
+        document.getElementById('tenant-step-' + tenantCurrentStep).style.display = 'block';
         updateTenantProgress();
     }
 }
@@ -707,12 +707,12 @@ function handleFormSubmit(e, formType) {
         e.target.reset();
         currentStep = 1;
         tenantCurrentStep = 1;
-        document.getElementById('form-step-2').classList.add('hidden');
-        document.getElementById('form-step-3').classList.add('hidden');
-        document.getElementById('form-step-1').classList.remove('hidden');
-        document.getElementById('tenant-step-2').classList.add('hidden');
-        document.getElementById('tenant-step-3').classList.add('hidden');
-        document.getElementById('tenant-step-1').classList.remove('hidden');
+        document.getElementById('form-step-2').style.display = 'none';
+        document.getElementById('form-step-3').style.display = 'none';
+        document.getElementById('form-step-1').style.display = 'block';
+        document.getElementById('tenant-step-2').style.display = 'none';
+        document.getElementById('tenant-step-3').style.display = 'none';
+        document.getElementById('tenant-step-1').style.display = 'block';
         updateProgress();
         updateTenantProgress();
         btn.innerHTML = originalText;
